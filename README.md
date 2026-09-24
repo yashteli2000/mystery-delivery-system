@@ -40,6 +40,14 @@ Efficiency
 
 efficiency = total distance / packages delivered
 For an agent who delivers zero packages, efficiency is reported as 0 and the agent is not considered when selecting the best agent.
+
+Design Decisions
+
+* All agents are included in the final report, even if they are not assigned any package.
+* For an agent with zero delivered packages, efficiency is reported as `0` to avoid division by zero.
+* Agents with zero delivered packages are not considered when selecting the best agent.
+* The best agent is selected based on the lowest efficiency value among agents who delivered at least one package.
+
 Project Structure
 mystery-delivery-system/
 │
