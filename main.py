@@ -25,7 +25,7 @@ def find_best_agent(agent_report):
     best_agent_name=''
     for agent,details in agent_report.items():
         
-        if min_efficiency > details['efficiency']:
+        if details['packages_delivered'] > 0 and min_efficiency > details['efficiency']:
             min_efficiency = details['efficiency']
             best_agent_name=agent
 
@@ -33,7 +33,7 @@ def find_best_agent(agent_report):
 
 
 # Path of the input JSON file
-file_path="Python Assignment -2026/Python Assignment(Delivery System Test Cases)/test_case_2.json"
+file_path="../Python Assignment -2026/Python Assignment(Delivery System Test Cases)/test_case_4.json"
 with open(file_path,"r",encoding='utf-8') as file:
 
     # Read and parse the JSON data
@@ -44,7 +44,11 @@ with open(file_path,"r",encoding='utf-8') as file:
     packages = data["packages"]
 
     agent_report = {}
-    
+    for agent in agents:
+                agent_report[agent] = {
+                    "packages_delivered": 0,
+                    "total_distance": 0
+            }
     assignments = {}
     # Process each package one by one
     for package in packages:
@@ -53,7 +57,7 @@ with open(file_path,"r",encoding='utf-8') as file:
         points2 = warehouses[warehouse]
 
         agent_distances={}
-
+        
         # Calculate distance from each agent to the package warehouse
         for agent, points1 in agents.items():
             ans = euclidean_distance(points1, points2)
@@ -92,11 +96,13 @@ with open(file_path,"r",encoding='utf-8') as file:
 
     # Calculate efficiency for each agent
     for agent, details in agent_report.items():
-        efficiency = details["total_distance"] / details["packages_delivered"]
-
         details["total_distance"] = round(details["total_distance"], 2)
+        if details["packages_delivered"] > 0:
+            efficiency = details["total_distance"] / details["packages_delivered"]
+        else:
+            efficiency = 0
         details["efficiency"] = round(efficiency, 2)
-
+    
     # Find the most efficient agent
     best = find_best_agent(agent_report)
 
