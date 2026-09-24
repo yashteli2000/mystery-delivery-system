@@ -39,7 +39,7 @@ distance = √((x2 - x1)² + (y2 - y1)²)
 Efficiency
 
 efficiency = total distance / packages delivered
-
+For an agent who delivers zero packages, efficiency is reported as 0 and the agent is not considered when selecting the best agent.
 Project Structure
 mystery-delivery-system/
 │
@@ -61,7 +61,8 @@ mystery-delivery-system/
     └── test_case_10.json
 How to Run
 Requirements
-Python 3.x
+Python 3
+No external Python packages are required.
 Run the program
 
 Clone the repository and navigate to the project directory:
@@ -112,7 +113,7 @@ The system generates an agent-wise report containing:
 Number of packages delivered
 Total distance traveled
 Efficiency
-Best performing agent
+Best agent based on the lowest efficiency among agents who delivered at least one package
 
 The output is saved to report.json.
 
@@ -123,7 +124,7 @@ json module
 math module
 Testing
 
-The program includes multiple JSON test cases to verify the delivery assignment and distance calculation logic with different input data.
+The program was tested using 10 different JSON test cases to verify the delivery assignment and distance calculation logic with different input data.
 
 Assignment
 
